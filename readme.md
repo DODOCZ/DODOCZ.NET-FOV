@@ -28,8 +28,39 @@ For better explanation - the camera view cannot be zoomed out, you only have two
    ```cfg
    ensure ddcz_fov
 
-How It Works
-The script continuously monitors for the P key press (control ID 199) and disables the associated action that normally opens the map. By doing this, it ensures that pressing P will no longer bring up the map interface.
+How It Works ? 
+Here’s a detailed description of how the script works:
+
+Variable Initialization:
+
+ddcz_cam: Reference to the camera.
+ddcz_isCameraActive: Flag indicating whether the camera is active.
+ddcz_UsePerson: Flag for toggling between first-person and third-person camera modes.
+ddcz_justpressed: Count of how many times the control button has been pressed.
+ddcz_disable: Time for disabling certain controls.
+ddcz_INPUT_AIM: Input ID for activation (can be changed as needed).
+Helper Functions:
+
+ddcz_clamp(value, min, max): Clamps a value between min and max.
+Function ddcz_setupCamera():
+
+Creates and sets up the camera.
+The camera is attached to a specific bone of the character (typically the head) and initial field of view (FOV) and rotation settings are applied.
+Starts a loop that continually adjusts the camera’s rotation based on player input (mouse or analog stick).
+If the player exits the vehicle or changes the camera mode, the camera is deactivated and destroyed.
+Main Loop for FPS Camera Control:
+
+Monitors for presses and releases of the control button (ddcz_INPUT_AIM).
+If the button is pressed, it increments ddcz_justpressed.
+If the button is released and the count of presses is less than 15, it sets ddcz_UsePerson to true.
+If ddcz_UsePerson is active, it toggles between first-person and third-person camera modes.
+Main Loop for Detecting Player Status and Camera Activation/Deactivation:
+
+Monitors the character's status to determine if they are in a vehicle and if the camera is in first-person mode.
+Activates the camera if the character is in a vehicle and in first-person mode, and deactivates it if the character exits the vehicle.
+This script provides a customized first-person camera experience while driving and ensures that the camera and controls are properly managed based on player inputs and the character's status.
+
+
 
 License
 This project is licensed under the MIT License. You are free to use, modify, and distribute this script as long as you comply with the terms of the license.
