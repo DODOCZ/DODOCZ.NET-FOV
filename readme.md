@@ -28,9 +28,17 @@ For better explanation - the camera view cannot be zoomed out, you only have two
    ```cfg
    ensure ddcz_fov
 
+## Screenshots 
+![dada](https://github.com/user-attachments/assets/9b95f958-396a-4939-9314-10f0753c80a4)
+![image](https://github.com/user-attachments/assets/9f6c6aed-a2dc-4258-9ddf-688965a0b1f2)
+![dadwadad](https://github.com/user-attachments/assets/f5e1ecb9-da41-46f8-9425-0e814cd9e9ed)
+
+##Video 
+https://medal.tv/games/gta-v/clips/ixPtdzY8FYnfj1tyT/d1337qXuzlP9?invite=cr-MSxwc0MsMjAwNDkxNzI5LA
+
+
 # How It Works ? 
 
-# Camera Control Script
 
 ## Overview
 
