@@ -33,8 +33,9 @@ For better explanation - the camera view cannot be zoomed out, you only have two
 ![image](https://github.com/user-attachments/assets/9f6c6aed-a2dc-4258-9ddf-688965a0b1f2)
 ![dadwadad](https://github.com/user-attachments/assets/f5e1ecb9-da41-46f8-9425-0e814cd9e9ed)
 
-##Video 
-https://medal.tv/games/gta-v/clips/ixPtdzY8FYnfj1tyT/d1337qXuzlP9?invite=cr-MSxwc0MsMjAwNDkxNzI5LA
+## Video 
+https://github.com/user-attachments/assets/6507880b-555e-4ace-b173-ed6717815ea9
+
 
 
 # How It Works ? 
