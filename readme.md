@@ -28,7 +28,7 @@ For better explanation - the camera view cannot be zoomed out, you only have two
    ```cfg
    ensure ddcz_fov
 
-How It Works ? 
+# How It Works ? 
 
 # Camera Control Script
 
