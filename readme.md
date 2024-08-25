@@ -2,19 +2,19 @@
 # DODOCZ.NET [FOV] system - FiveM Script
 
 
-• **This script is created so that when you get into the vehicle, so that you have a better view around you.
-• **This script only switches between two cameras.
-• **For better explanation - the camera view cannot be zoomed out, you only have two cameras to choose from.
+- **This script is created so that when you get into the vehicle, so that you have a better view around you.
+- **This script only switches between two cameras.
+- **For better explanation - the camera view cannot be zoomed out, you only have two cameras to choose from.
 
 ## Controls
-• **Switching the camera is done with the `V` button.
-• **If you are sitting in your car and point the gun with the right button, press `V` to zoom in on the camera.
-• **Each time you press `V` the camera returns to its original position.
+- **Switching the camera is done with the `V` button.
+- **If you are sitting in your car and point the gun with the right button, press `V` to zoom in on the camera.
+- **Each time you press `V` the camera returns to its original position.
 
 
 ## Features
 
-- **Turn off multiple camera views:** This ensures that players can't zoom out the camera to see what the character couldn't see in reality.
+cTurn off multiple camera views:** This ensures that players can't zoom out the camera to see what the character couldn't see in reality.
 - **Lightweight:** Runs efficiently in the background with minimal performance impact.
 - **More visibility:** Thanks to this script you have a much better view around you in the vehicle.
 - **Standalone:** Easy to integrate with no external dependencies.
