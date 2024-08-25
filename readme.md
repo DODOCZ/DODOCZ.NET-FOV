@@ -14,7 +14,7 @@
 
 ## Features
 
-cTurn off multiple camera views:** This ensures that players can't zoom out the camera to see what the character couldn't see in reality.
+- **Turn off multiple camera views:** This ensures that players can't zoom out the camera to see what the character couldn't see in reality.
 - **Lightweight:** Runs efficiently in the background with minimal performance impact.
 - **More visibility:** Thanks to this script you have a much better view around you in the vehicle.
 - **Standalone:** Easy to integrate with no external dependencies.
