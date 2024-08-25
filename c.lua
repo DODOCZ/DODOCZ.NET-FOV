@@ -1,17 +1,17 @@
 Citizen.CreateThread(function()
     local ddcz_cam = nil
     local ddcz_isCameraActive = false
-    local ddcz_UsePerson = false -- Přejmenováno na UsePerson
+    local ddcz_UsePerson = false 
     local ddcz_justpressed = 0
     local ddcz_disable = 0
-    local ddcz_INPUT_AIM = 0 -- Můžeš změnit na příslušný kontrolní vstup (např. 24 pro aiming)
+    local ddcz_INPUT_AIM = 0 
 
-    -- Pomocná funkce pro omezení hodnoty
+    
     local function ddcz_clamp(value, min, max)
         return math.max(min, math.min(max, value))
     end
 
-    -- Funkce pro vytvoření a nastavení kamery
+    
     local function ddcz_setupCamera()
         local ped = PlayerPedId()
         local bone = GetPedBoneIndex(ped, 12844)
@@ -24,13 +24,13 @@ Citizen.CreateThread(function()
         local currentRotX = 0.0
         local currentRotZ = 0.0
 
-        -- Vytvoření kamery a okamžité nastavení FOV
+        
         ddcz_cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
         SetCamFov(ddcz_cam, initialFov)
         SetCamNearClip(ddcz_cam, 0.09)
-        RenderScriptCams(true, false, 0, true, true) -- Okamžitá aktivace kamery
+        RenderScriptCams(true, false, 0, true, true) 
 
-        -- Hlavní smyčka pro správu kamery
+        
         Citizen.CreateThread(function()
             while ddcz_isCameraActive do
                 Citizen.Wait(0)
@@ -41,8 +41,8 @@ Citizen.CreateThread(function()
                 if isInVehicle and isFirstPerson then
                     AttachCamToPedBone(ddcz_cam, ped, bone, 0.0, 0.1, 0.6, true)
 
-                    local x = GetDisabledControlNormal(0, 1) -- Osa X myši
-                    local y = GetDisabledControlNormal(0, 2) -- Osa Y myši
+                    local x = GetDisabledControlNormal(0, 1) -- X-axis mouse
+                    local y = GetDisabledControlNormal(0, 2) -- Mouse Y axis
 
                     -- Úprava rotace kamery podle vstupů
                     currentRotX = ddcz_clamp(currentRotX - y * 5.0, -30.0, 30.0)
@@ -53,7 +53,7 @@ Citizen.CreateThread(function()
                     local adjustedRotZ = (currentRotZ + vehicleHeading) % 360
                     SetCamRot(ddcz_cam, vector3(currentRotX, 0.0, adjustedRotZ), 2)
                 else
-                    -- Deaktivace kamery, pokud hráč vystoupí z vozidla nebo přepne kameru
+                    
                     ddcz_isCameraActive = false
                     RenderScriptCams(false, false, 0, true, true)
                     DestroyCam(ddcz_cam, false)
@@ -62,13 +62,13 @@ Citizen.CreateThread(function()
         end)
     end
 
-    -- Smyčka pro ovládání přepínání FPS kamery
+    
     Citizen.CreateThread(function()
         while true do
             Citizen.Wait(1)
             local ped = PlayerPedId()
 
-            -- Ovládání přepínání FPS kamery
+            
             if IsControlPressed(0, ddcz_INPUT_AIM) then
                 ddcz_justpressed = ddcz_justpressed + 1
             end
@@ -93,7 +93,7 @@ Citizen.CreateThread(function()
                 ddcz_UsePerson = false
             end
 
-            -- Ovládání deaktivace vstupů pouze pokud je kamera aktivní
+            
             if ddcz_isCameraActive then
                 if IsPedArmed(ped, 1) or not IsPedArmed(ped, 7) then
                     if IsControlJustPressed(0, 24) or IsControlJustPressed(0, 141) or IsControlJustPressed(0, 142) or IsControlJustPressed(0, 140) then
@@ -112,12 +112,12 @@ Citizen.CreateThread(function()
         end
     end)
 
-    -- Smyčka pro kontrolu zbraní
+    -
     Citizen.CreateThread(function()
         while true do
             Citizen.Wait(1500)
             if IsPedArmed(PlayerPedId(), 6) then
-                -- Zkontrolujeme pouze pokud je kamera aktivní
+                
                 if ddcz_isCameraActive then
                     DisableControlAction(1, 140, true)
                     DisableControlAction(1, 141, true)
@@ -127,9 +127,9 @@ Citizen.CreateThread(function()
         end
     end)
 
-    -- Hlavní smyčka pro detekci stavu hráče a aktivaci/deaktivaci kamery
+    
     while true do
-        Citizen.Wait(100) -- Zkrácení času mezi kontrolami
+        Citizen.Wait(100) 
 
         local ped = PlayerPedId()
         local isInVehicle = IsPedInAnyVehicle(ped, false)
@@ -139,7 +139,7 @@ Citizen.CreateThread(function()
             ddcz_isCameraActive = true
             ddcz_setupCamera()
         elseif not isInVehicle and ddcz_isCameraActive then
-            -- Deaktivace kamery, pokud hráč vystoupí z vozidla
+            
             ddcz_isCameraActive = false
             RenderScriptCams(false, false, 0, true, true)
             DestroyCam(ddcz_cam, false)
