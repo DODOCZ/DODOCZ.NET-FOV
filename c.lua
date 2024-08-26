@@ -30,7 +30,7 @@ Citizen.CreateThread(function()
 
         
         ddcz_cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-        SetCamFov(ddcz_cam, initialFov) -- Nastavení FOV
+        SetCamFov(ddcz_cam, initialFov) 
         SetCamNearClip(ddcz_cam, 0.09)
         RenderScriptCams(true, false, 0, true, true)
 
@@ -74,7 +74,7 @@ Citizen.CreateThread(function()
         else
             local ped = PlayerPedId()
             local vehicle = GetVehiclePedIsIn(ped, false)
-            local rearCamOffset = vector3(0.0, -0.3, 0.6) -- Nastavení pozice kamery za vozidlem
+            local rearCamOffset = vector3(0.0, -0.3, 0.6)
             local initialFov = 100.0
 
             
