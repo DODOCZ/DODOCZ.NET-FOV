@@ -16,7 +16,7 @@
 
 1. **Add the Script to Your Resources**
 
-   Place the script file in your `resources` folder. For example, if your script is named `ddcz_fov_system.lua`, it should be placed in `resources/[your_resource_folder]/ddcz_fov_system.lua`.
+   Place the script file in your `resources` folder. For example, if your script is named `ddcz_fov_system`, it should be placed in `resources/ddcz_fov_system`.
 
 2. **Add the Script to Your `server.cfg`**
 
@@ -24,7 +24,6 @@
 
    ```plaintext
    ensure ddcz_fov_system
-
 
 ## Screenshots 
 ![dada](https://github.com/user-attachments/assets/9b95f958-396a-4939-9314-10f0753c80a4)
