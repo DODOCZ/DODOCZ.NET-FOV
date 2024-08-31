@@ -3,16 +3,18 @@ Citizen.CreateThread(function()
     local ddcz_camOffsetX = tonumber(GetConvar("profile_camOffsetX", "0.0"))
     local ddcz_camOffsetY = tonumber(GetConvar("profile_camOffsetY", "-0.5")) 
     local ddcz_camOffsetZ = tonumber(GetConvar("profile_camOffsetZ", "0.6"))
-    local ddcz_initialFov = tonumber(GetConvar("profile_fpsFieldOfView", "70.0"))
+    local ddcz_initialFov = tonumber(GetConvar("profile_fpsFieldOfView", "70.0")) 
 
     
     local ddcz_camOffset = vector3(ddcz_camOffsetX, ddcz_camOffsetY, ddcz_camOffsetZ)
 
     
     local ddcz_INPUT_AIM = 0
+    local ddcz_INPUT_RIGHT_MOUSE = 25 
     local ddcz_Person = false
     local ddcz_justpressed = 0
     local ddcz_disable = 0
+    local ddcz_isFirstPerson = false 
 
     
     Citizen.CreateThread(function()
@@ -38,7 +40,7 @@ Citizen.CreateThread(function()
                 SetFollowVehicleCamViewMode(0)
             end
 
-            y
+            
             if ddcz_Person then
                 if GetFollowPedCamViewMode() == 0 or GetFollowVehicleCamViewMode() == 0 then
                     Citizen.Wait(1)
@@ -53,8 +55,36 @@ Citizen.CreateThread(function()
             end
 
             
-            local ddcz_ped = PlayerPedId()
-            if IsPedArmed(ddcz_ped, 1) or not IsPedArmed(ddcz_ped, 7) then
+            local playerPed = PlayerPedId()
+            local isInVehicle = IsPedInAnyVehicle(playerPed, false)
+            local isInFirstPerson = (GetFollowPedCamViewMode() == 4) or (GetFollowVehicleCamViewMode() == 4)
+
+            if not isInVehicle then
+                
+                if IsControlPressed(0, ddcz_INPUT_RIGHT_MOUSE) then
+                    if not ddcz_isFirstPerson and not isInFirstPerson then
+                        ddcz_isFirstPerson = true
+                        SetFollowPedCamViewMode(4)
+                        SetFollowVehicleCamViewMode(4)
+                    end
+                else
+                    if ddcz_isFirstPerson then
+                        ddcz_isFirstPerson = false
+                        SetFollowPedCamViewMode(0)
+                        SetFollowVehicleCamViewMode(0)
+                    end
+                end
+            else
+                
+                if ddcz_isFirstPerson then
+                    ddcz_isFirstPerson = false
+                    SetFollowPedCamViewMode(0)
+                    SetFollowVehicleCamViewMode(0)
+                end
+            end
+
+            
+            if IsPedArmed(playerPed, 1) or not IsPedArmed(playerPed, 7) then
                 if IsControlJustPressed(0, 24) or IsControlJustPressed(0, 141) or IsControlJustPressed(0, 142) or IsControlJustPressed(0, 140) then
                     ddcz_disable = 50
                 end
