@@ -1,10 +1,11 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
 game 'gta5'
 
--- Skripty
-client_script 'c.lua'
-
--- Metadata
-description 'FOV Adjuster Script for First Person'
 author 'DODOCZ.NET'
-version '1.0.0'
+description 'FOV Adjuster Script for First Person'
+version '1.0.2'
+
+
+client_scripts {
+    'c.lua'
+}
