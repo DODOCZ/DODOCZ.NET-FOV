@@ -1,3 +1,5 @@
+local ddcz_toggleRMB = true -- By default the function is activated
+
 Citizen.CreateThread(function()
     -- Reading configuration values from server.cfg
     local ddcz_camOffsetX = tonumber(GetConvar("profile_camOffsetX", "0.0"))
@@ -5,10 +7,8 @@ Citizen.CreateThread(function()
     local ddcz_camOffsetZ = tonumber(GetConvar("profile_camOffsetZ", "0.6"))
     local ddcz_initialFov = tonumber(GetConvar("profile_fpsFieldOfView", "70.0")) 
 
-    
     local ddcz_camOffset = vector3(ddcz_camOffsetX, ddcz_camOffsetY, ddcz_camOffsetZ)
 
-    
     local ddcz_INPUT_AIM = 0
     local ddcz_INPUT_RIGHT_MOUSE = 25 
     local ddcz_Person = false
@@ -16,12 +16,20 @@ Citizen.CreateThread(function()
     local ddcz_disable = 0
     local ddcz_isFirstPerson = false 
 
-    
+    RegisterCommand("toggleRMB", function()
+        ddcz_toggleRMB = not ddcz_toggleRMB
+        --local status = ddcz_toggleRMB and "Activated" or "deactivated"
+        --TriggerEvent('chat:addMessage', {
+            --color = { 255, 0, 0},
+            --multiline = true,
+            --args = {"ddczfov", "Switching with the right button was " .. status}
+        --})
+    end, false)
+
     Citizen.CreateThread(function()
         while true do
             Citizen.Wait(1)
 
-            
             if IsControlPressed(0, ddcz_INPUT_AIM) then
                 ddcz_justpressed = ddcz_justpressed + 1
             end
@@ -33,14 +41,12 @@ Citizen.CreateThread(function()
                 ddcz_justpressed = 0
             end
 
-            
             if GetFollowPedCamViewMode() == 1 or GetFollowVehicleCamViewMode() == 1 then
                 Citizen.Wait(1)
                 SetFollowPedCamViewMode(0)
                 SetFollowVehicleCamViewMode(0)
             end
 
-            
             if ddcz_Person then
                 if GetFollowPedCamViewMode() == 0 or GetFollowVehicleCamViewMode() == 0 then
                     Citizen.Wait(1)
@@ -54,28 +60,37 @@ Citizen.CreateThread(function()
                 ddcz_Person = false
             end
 
-            
             local playerPed = PlayerPedId()
             local isInVehicle = IsPedInAnyVehicle(playerPed, false)
             local isInFirstPerson = (GetFollowPedCamViewMode() == 4) or (GetFollowVehicleCamViewMode() == 4)
 
-            if not isInVehicle then
-                
+            
+            if not isInVehicle and ddcz_toggleRMB then
                 if IsControlPressed(0, ddcz_INPUT_RIGHT_MOUSE) then
                     if not ddcz_isFirstPerson and not isInFirstPerson then
                         ddcz_isFirstPerson = true
                         SetFollowPedCamViewMode(4)
-                        SetFollowVehicleCamViewMode(4)
                     end
                 else
                     if ddcz_isFirstPerson then
                         ddcz_isFirstPerson = false
                         SetFollowPedCamViewMode(0)
+                    end
+                end
+            
+            elseif isInVehicle and ddcz_toggleRMB then
+                if IsControlPressed(0, ddcz_INPUT_RIGHT_MOUSE) then
+                    if not ddcz_isFirstPerson and not isInFirstPerson then
+                        ddcz_isFirstPerson = true
+                        SetFollowVehicleCamViewMode(4)
+                    end
+                else
+                    if ddcz_isFirstPerson then
+                        ddcz_isFirstPerson = false
                         SetFollowVehicleCamViewMode(0)
                     end
                 end
             else
-                
                 if ddcz_isFirstPerson then
                     ddcz_isFirstPerson = false
                     SetFollowPedCamViewMode(0)
@@ -83,7 +98,6 @@ Citizen.CreateThread(function()
                 end
             end
 
-            
             if IsPedArmed(playerPed, 1) or not IsPedArmed(playerPed, 7) then
                 if IsControlJustPressed(0, 24) or IsControlJustPressed(0, 141) or IsControlJustPressed(0, 142) or IsControlJustPressed(0, 140) then
                     ddcz_disable = 50
@@ -100,7 +114,6 @@ Citizen.CreateThread(function()
         end
     end)
 
-    
     Citizen.CreateThread(function()
         while true do
             Citizen.Wait(1)
