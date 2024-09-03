@@ -27,16 +27,10 @@
 3. **Configure the Script**
 -Add the following configuration settings to your server.cfg to customize the FOV system:
    ```plaintext
-   setr profile_camOffsetX 0.0
-   setr profile_camOffsetY -0.5
-   setr profile_camOffsetZ 0.6
-   setr profile_fpsFieldOfView 30
-   setr profile_CameraHeight 1
+   setr profile_fpsFieldOfView 30.0
+   setr profile_CameraHeight 1  
    setr profile_fpsAutoLevel 1
    setr profile_fpsHeadBob 1
-   setr profile_rearCamOffsetX 0.0
-   setr profile_rearCamOffsetY -0.5
-   setr profile_rearCamOffsetZ 0.6
 ## !Important!: These settings are crucial for the script's functionality. They adjust the FOV across the entire game, not just in vehicles.
 
 ## Usage
